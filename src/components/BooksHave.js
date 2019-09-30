@@ -1,25 +1,32 @@
 import React, {useContext} from 'react';
 import { BooksHaveContext } from '../contexts/BooksHaveContext';
 import BookDetails from './BookDetails';
+import Title from './Title';
+import Modal from './Modal';
 
 const BooksHave = () => {
     const { booksHave } = useContext(BooksHaveContext);
 
     return booksHave.length ? (
         <div className="container">
-            <h2 className="dispaly-4 text-capitalize my-5">Books that I own</h2>
+            <Title title="Books that I own" type="booksHave"/>
+            <Modal modalId="addHaveModal"/>
             <div className="card-columns">
                 {
                     booksHave.map(book => {
                         return(                           
-                            <BookDetails key={book.id} book={book}></BookDetails> 
+                            <BookDetails key={book.id} book={book} modalId="addHaveModal"></BookDetails> 
                         )
                     })
                 }
             </div>           
         </div>
     ) : (
-        <div></div>
+        <div className="container">
+            <Title title="Books that I own" type="booksHave"/>
+            <Modal modalId="addHaveModal"/>
+            <p>Sorry, you don't own any books now.</p>
+        </div>
     );
 };
 
